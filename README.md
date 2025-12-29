@@ -1,7 +1,5 @@
 # HuiGOMall
 
-This is a mall
-
 
 [![GitHub Stars](https://img.shields.io/github/stars/YOUR_USERNAME/HuiGoRAG_2?style=flat-square&logo=github&color=yellow)](https://github.com/YOUR_USERNAME/HuiGoRAG_2/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
@@ -13,6 +11,11 @@ This is a mall
 [![Redis](https://img.shields.io/badge/Redis-7.x-red?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
 
 代码的架构借鉴自[mall]("https://github.com/macrozheng/mall/tree/master")
+
+scut网络应用架构课程作品
+
+学号:202366450351
+姓名：程柱豪
 
 ## 项目介绍
 
