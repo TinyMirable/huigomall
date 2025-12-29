@@ -1,0 +1,48 @@
+# 用户后端 Dockerfile
+FROM maven:3.9-eclipse-temurin-21 AS builder
+
+WORKDIR /app
+
+# 复制所有 pom 文件
+COPY hgmall-mbg/pom.xml /app/hgmall-mbg/
+COPY hgmall-common/pom.xml /app/hgmall-common/
+COPY hgmall-portal/mall/pom.xml /app/hgmall-portal/mall/
+
+# 下载依赖（利用 Docker 缓存）
+RUN mvn dependency:go-offline -f /app/hgmall-mbg/pom.xml || true
+RUN mvn dependency:go-offline -f /app/hgmall-common/pom.xml || true
+RUN mvn dependency:go-offline -f /app/hgmall-portal/mall/pom.xml || true
+
+# 复制源代码
+COPY hgmall-mbg /app/hgmall-mbg
+COPY hgmall-common /app/hgmall-common
+COPY hgmall-portal /app/hgmall-portal
+
+# 按顺序构建模块
+WORKDIR /app/hgmall-mbg
+RUN mvn clean install -DskipTests
+
+WORKDIR /app/hgmall-common
+RUN mvn clean install -DskipTests
+
+WORKDIR /app/hgmall-portal/mall
+RUN mvn clean package -DskipTests
+
+# 运行阶段
+FROM eclipse-temurin:21-jre-alpine
+
+WORKDIR /app
+
+# 复制构建的 jar 文件
+COPY --from=builder /app/hgmall-portal/mall/target/*.jar app.jar
+
+# 暴露端口
+EXPOSE 8080
+
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1
+
+# 运行应用
+ENTRYPOINT ["java", "-jar", "app.jar"]
+

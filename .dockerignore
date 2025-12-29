@@ -1,0 +1,10 @@
+**/target/
+**/node_modules/
+**/.git/
+**/.idea/
+**/*.iml
+**/dist/
+**/build/
+*.log
+.DS_Store
+

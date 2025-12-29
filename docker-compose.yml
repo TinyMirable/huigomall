@@ -1,0 +1,168 @@
+version: '3.8'
+
+services:
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:15-alpine
+    container_name: hgmall-postgres
+    environment:
+      POSTGRES_DB: hgmall_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docs/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hgmall-network
+
+  # Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: hgmall-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hgmall-network
+
+  # 账号生成器（一次性任务）
+  account-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile.account-generator
+    container_name: hgmall-account-generator
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: hgmall_db
+      DB_USER: postgres
+      DB_PASSWORD: postgres123
+    networks:
+      - hgmall-network
+    profiles:
+      - init
+    restart: "no"
+
+  # 管理员后端服务
+  admin-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin
+    container_name: hgmall-admin-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hgmall_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres123
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SERVER_PORT: 8081
+      JWT_SECRET: TheMallSecretKeyForJWTTokenGeneration2024SecureKey
+    ports:
+      - "8081:8081"
+    networks:
+      - hgmall-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8081/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # 用户后端服务
+  portal-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.portal
+    container_name: hgmall-portal-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hgmall_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres123
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SERVER_PORT: 8080
+      JWT_SECRET: TheMallSecretKeyForJWTTokenGeneration2024SecureKey
+    ports:
+      - "8080:8080"
+    networks:
+      - hgmall-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # 前端服务
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: hgmall-frontend
+    depends_on:
+      admin-backend:
+        condition: service_healthy
+      portal-backend:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    networks:
+      - hgmall-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+  # Nginx 反向代理
+  nginx:
+    image: nginx:alpine
+    container_name: hgmall-nginx
+    depends_on:
+      - frontend
+      - admin-backend
+      - portal-backend
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - hgmall-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  hgmall-network:
+    driver: bridge
+

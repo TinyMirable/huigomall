@@ -1,0 +1,39 @@
+# 前端 Dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+# 安装 curl（用于健康检查）
+RUN apk add --no-cache curl
+
+# 复制 package 文件
+COPY hgmall-frontend/package*.json ./
+
+# 安装依赖
+RUN npm ci
+
+# 复制源代码
+COPY hgmall-frontend .
+
+# 复制 API 生成脚本
+COPY scripts/generate-api.sh /app/scripts/
+RUN chmod +x /app/scripts/generate-api.sh
+
+# 创建启动脚本
+RUN echo '#!/bin/sh' > /app/start.sh && \
+    echo 'set -e' >> /app/start.sh && \
+    echo 'echo "等待后端服务启动并生成 API 代码..."' >> /app/start.sh && \
+    echo '/app/scripts/generate-api.sh' >> /app/start.sh && \
+    echo 'echo "构建前端应用..."' >> /app/start.sh && \
+    echo 'npm run build' >> /app/start.sh && \
+    echo 'echo "启动前端服务..."' >> /app/start.sh && \
+    echo 'npm install -g serve' >> /app/start.sh && \
+    echo 'exec serve -s dist -l 3000' >> /app/start.sh && \
+    chmod +x /app/start.sh
+
+# 暴露端口
+EXPOSE 3000
+
+# 启动服务
+CMD ["/app/start.sh"]
+

@@ -1,0 +1,38 @@
+# 账号生成器 Dockerfile
+FROM maven:3.9-eclipse-temurin-21
+
+WORKDIR /app
+
+# 复制 pom 文件
+COPY hgmall-mbg/pom.xml /app/hgmall-mbg/
+COPY hgmall-common/pom.xml /app/hgmall-common/
+
+# 下载依赖
+RUN mvn dependency:go-offline -f /app/hgmall-mbg/pom.xml || true
+RUN mvn dependency:go-offline -f /app/hgmall-common/pom.xml || true
+
+# 复制源代码
+COPY hgmall-mbg /app/hgmall-mbg
+COPY hgmall-common /app/hgmall-common
+
+# 复制脚本
+COPY scripts/generate-accounts.sh /app/scripts/
+RUN chmod +x /app/scripts/generate-accounts.sh
+
+# 安装 PostgreSQL 客户端（用于健康检查）
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+
+# 构建 mbg 模块
+WORKDIR /app/hgmall-mbg
+RUN mvn clean install -DskipTests
+
+# 构建 common 模块
+WORKDIR /app/hgmall-common
+RUN mvn clean install -DskipTests
+
+# 设置工作目录
+WORKDIR /app
+
+# 运行账号生成脚本
+CMD ["/app/scripts/generate-accounts.sh"]
+
