@@ -1,0 +1,21 @@
+{
+  "generatorName": "typescript-axios",
+  "inputSpec": "http://localhost:8081/v3/api-docs",
+  "outputDir": "./src/api/generated-admin",
+  "additionalProperties": {
+    "supportsES6": true,
+    "withInterfaces": true,
+    "typescriptThreePlus": true,
+    "enumPropertyNaming": "original",
+    "modelPropertyNaming": "camelCase",
+    "withSeparateModelsAndApi": true,
+    "apiPackage": "api",
+    "modelPackage": "models"
+  }
+}
+
+
+
+
+
+

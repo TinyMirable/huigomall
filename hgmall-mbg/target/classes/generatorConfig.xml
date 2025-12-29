@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="generator.properties"/>
+
+    <!-- 上下文配置 -->
+    <context id="default" targetRuntime="MyBatis3">
+        <!-- PostgreSQL 保留关键字处理插件 -->
+        <plugin type="com.macro.mall.PostgreSQLReservedKeywordPlugin"/>
+        
+        <!-- 自定义注释生成器 -->
+        <commentGenerator type="com.macro.mall.CommentGenerator">
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="false"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.connectionURL}"
+                        userId="${jdbc.userId}"
+                        password="${jdbc.password}">
+            <!-- PostgreSQL需要指定schema，public是默认schema -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- Java类型解析器 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成Model模型，对应的包路径和文件存放路径 -->
+        <javaModelGenerator targetPackage="com.macro.mall.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <property name="constructorBased" value="false"/>
+        </javaModelGenerator>
+
+        <!-- 生成Mapper.xml文件，对应的文件存放路径 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成Mapper接口，对应的包路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.macro.mall.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 配置表，指定要生成的表 -->
+        
+        <!-- role表 -->
+        <table tableName="role" domainObjectName="Role">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="role_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- usr表 -->
+        <table tableName="usr" domainObjectName="Usr">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="user_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- address表 -->
+        <table tableName="address" domainObjectName="Address">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="address_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- merchant表 -->
+        <table tableName="merchant" domainObjectName="Merchant">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="merchant_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- shop表 -->
+        <table tableName="shop" domainObjectName="Shop">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="shop_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- product表 -->
+        <table tableName="product" domainObjectName="Product">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="product_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- sku表 -->
+        <table tableName="sku" domainObjectName="Sku">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="sku_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- category表 -->
+        <table tableName="category" domainObjectName="Category">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="category_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- product_category表 -->
+        <table tableName="product_category" domainObjectName="ProductCategory">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <!-- cart_item表 -->
+        <table tableName="cart_item" domainObjectName="CartItem">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <!-- batch_order表 -->
+        <table tableName="batch_order" domainObjectName="BatchOrder">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="batch_order_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- order表 -->
+        <table tableName="order" domainObjectName="Order">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="order_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!-- order_item表 -->
+        <table tableName="order_item" domainObjectName="OrderItem">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <!-- audit_log表 -->
+        <table tableName="audit_log" domainObjectName="AuditLog">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="audit_id" sqlStatement="JDBC"/>
+        </table>
+
+    </context>
+</generatorConfiguration>

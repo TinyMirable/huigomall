@@ -1,0 +1,57 @@
+spring.application.name=mall
+
+# 服务端口配置（避免与admin服务冲突）
+server.port=8080
+
+# 数据库配置（PostgreSQL）
+spring.datasource.url=jdbc:postgresql://localhost:5432/hgmall_db
+spring.datasource.username=postgres
+spring.datasource.password=your_password
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA配置
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+# MyBatis配置（mbg模块生成的Mapper）
+# 使用 classpath*: 来扫描 jar 包中的资源
+mybatis.mapper-locations=classpath*:mapper/*.xml
+mybatis.type-aliases-package=com.macro.mall.model
+mybatis.configuration.map-underscore-to-camel-case=true
+
+# Redis配置
+# 方式1: 使用标准Spring Boot配置（默认方式）
+spring.data.redis.host=localhost
+spring.data.redis.port=6379
+spring.data.redis.database=0
+# spring.data.redis.password=
+
+# 方式2: 使用REDIS_URL环境变量（可选）
+# 如果设置了REDIS_URL环境变量，可以启用此配置来使用URL方式
+# redis.url.enabled=true
+# REDIS_URL格式: redis://localhost:6379/0 或 redis://:password@localhost:6379/0
+
+# 邮件服务配置（用于发送验证码）
+# 如果未配置，验证码将仅打印到控制台（开发模式）
+spring.mail.host=smtp.qq.com
+spring.mail.port=587
+spring.mail.username=your_email_address
+spring.mail.password=your_email_password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+spring.mail.from=your_email_address
+
+# OpenAPI (Swagger) 配置
+springdoc.api-docs.path=/v3/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.enabled=true
+
+# JWT 配置
+# JWT 密钥（生产环境请使用更复杂的密钥，建议至少32个字符）
+jwt.secret=TheMallSecretKeyForJWTTokenGeneration2024SecureKey
+# JWT Token 有效期（毫秒），默认 7 天
+jwt.expiration=604800000
+
