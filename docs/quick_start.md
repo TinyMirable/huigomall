@@ -14,12 +14,30 @@ CREATE DATABASE hgmall_db;
 psql -U postgres -d hgmall_db -f docs/sql/init.sql
 ```
 ## 创建初始账号
-运行创建脚本：
 
-生成结果1个管理员，2个商家，2个用户
+在运行账号生成脚本之前，请确保：
+
+1. 数据库已经初始化（已执行 `docs/sql/init.sql`）
+2. 配置文件已正确设置：
+   - 复制 `hgmall-mbg/src/main/resources/generator.properties.example` 为 `generator.properties`
+   - 根据实际情况修改 `generator.properties` 中的数据库连接信息
+
+运行账号生成脚本：
+
+```sh
+cd hgmall-mbg
+mvn exec:java -Dexec.mainClass="com.macro.mall.AccountGenerator"
 ```
 
-```
+**生成的账号信息：**
+- **管理员账号：** 用户名 `admin`，密码 `admin123`
+- **商家账号1：** 用户名 `merchant1`，密码 `merchant123`
+- **商家账号2：** 用户名 `merchant2`，密码 `merchant123`
+- **用户账号1：** 用户名 `user1`，密码 `user123`
+- **用户账号2：** 用户名 `user2`，密码 `user123`
+
+> 注意：如果账号已存在，脚本会自动跳过，不会重复创建。
+
 ## 生成测试数据(可选)
 完成上面操作后运行
 ```sh

@@ -25,6 +25,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 启用CORS
             .csrf(csrf -> csrf.disable()) // 禁用 CSRF（开发阶段）
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/actuator/health", "/actuator/health/**").permitAll() // 允许健康检查端点公开访问
                 .requestMatchers("/api/auth/**").permitAll() // 允许认证相关接口公开访问（包括注册、登录、验证码等）
                 .requestMatchers("/api/home", "/api/products/**").permitAll() // 允许产品相关接口公开访问（首页、商品列表、商品详情）
                 .requestMatchers("/api/categories/**").permitAll() // 允许分类相关接口公开访问

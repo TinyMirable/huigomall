@@ -31,6 +31,9 @@ RUN mvn clean package -DskipTests
 # 运行阶段
 FROM eclipse-temurin:21-jre-alpine
 
+# 安装 curl 用于健康检查
+RUN apk add --no-cache curl
+
 WORKDIR /app
 
 # 复制构建的 jar 文件

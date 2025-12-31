@@ -18,3 +18,5 @@ echo ""
 echo "查看服务状态: $DOCKER_COMPOSE ps"
 echo "查看日志: $DOCKER_COMPOSE logs -f"
 
+
+

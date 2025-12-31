@@ -69,3 +69,5 @@ $RECYCLE.BIN/
 /hgmall-portal/mall/src/main/resources/application.properties
 /hgmall-admin/src/main/resources/application.properties
 /hgmall-common/src/main/resources/application.properties
+/hgmall-frontend/src/api/generated/
+/hgmall-frontend/src/api/generated-admin/

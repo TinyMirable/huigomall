@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS address (
     is_default BOOLEAN DEFAULT FALSE,
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_address_user FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE
+    CONSTRAINT fk_address_user FOREIGN KEY (user_id) REFERENCES "usr"(user_id) ON DELETE CASCADE
 );
 
 COMMENT ON TABLE address IS '地址表';
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS merchant (
     status INTEGER DEFAULT 1,
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_merchant_user FOREIGN KEY (user_id) REFERENCES "user"(user_id)
+    CONSTRAINT fk_merchant_user FOREIGN KEY (user_id) REFERENCES "usr"(user_id)
 );
 
 COMMENT ON TABLE merchant IS '商家表';
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS cart_item (
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id, item_id),
-    CONSTRAINT fk_cart_user FOREIGN KEY (user_id) REFERENCES "user"(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_cart_user FOREIGN KEY (user_id) REFERENCES "usr"(user_id) ON DELETE CASCADE,
     CONSTRAINT fk_cart_sku FOREIGN KEY (sku_id) REFERENCES sku(sku_id) ON DELETE CASCADE,
     CONSTRAINT chk_cart_num CHECK (num > 0)
 );
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS batch_order (
     pay_time TIMESTAMP,
     expire_time TIMESTAMP NOT NULL,
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_batch_order_user FOREIGN KEY (user_id) REFERENCES "user"(user_id),
+    CONSTRAINT fk_batch_order_user FOREIGN KEY (user_id) REFERENCES "usr"(user_id),
     CONSTRAINT fk_batch_order_address FOREIGN KEY (address_id) REFERENCES address(address_id),
     CONSTRAINT chk_batch_order_total CHECK (total_amount >= 0)
 );
@@ -249,7 +249,7 @@ CREATE TABLE IF NOT EXISTS "order" (
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_order_batch_order FOREIGN KEY (batch_order_id) REFERENCES batch_order(batch_order_id) ON DELETE CASCADE,
-    CONSTRAINT fk_order_user FOREIGN KEY (user_id) REFERENCES "user"(user_id),
+    CONSTRAINT fk_order_user FOREIGN KEY (user_id) REFERENCES "usr"(user_id),
     CONSTRAINT fk_order_shop FOREIGN KEY (shop_id) REFERENCES shop(shop_id),
     CONSTRAINT fk_order_address FOREIGN KEY (address_id) REFERENCES address(address_id),
     CONSTRAINT chk_order_total CHECK (total >= 0)
@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS audit_log (
     operation_type VARCHAR(50),
     operation_desc TEXT,
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_audit_admin FOREIGN KEY (admin_user_id) REFERENCES "user"(user_id) ON DELETE SET NULL
+    CONSTRAINT fk_audit_admin FOREIGN KEY (admin_user_id) REFERENCES "usr"(user_id) ON DELETE SET NULL
 );
 
 COMMENT ON TABLE audit_log IS '审计日志表';
@@ -444,10 +444,10 @@ END $$;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_role_code ON role(role_code);
 
 -- user表索引
-CREATE UNIQUE INDEX IF NOT EXISTS idx_user_name ON "user"(user_name);
-CREATE UNIQUE INDEX IF NOT EXISTS idx_user_email ON "user"(email);
-CREATE INDEX IF NOT EXISTS idx_user_phone ON "user"(phone_number);
-CREATE INDEX IF NOT EXISTS idx_user_role ON "user"(role_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_user_name ON "usr"(user_name);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_user_email ON "usr"(email);
+CREATE INDEX IF NOT EXISTS idx_user_phone ON "usr"(phone_number);
+CREATE INDEX IF NOT EXISTS idx_user_role ON "usr"(role_id);
 
 -- address表索引
 CREATE INDEX IF NOT EXISTS idx_address_user ON address(user_id);

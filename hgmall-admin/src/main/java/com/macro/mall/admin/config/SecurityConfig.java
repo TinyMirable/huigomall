@@ -25,6 +25,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) // 启用CORS
             .csrf(csrf -> csrf.disable()) // 禁用 CSRF（开发阶段）
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/actuator/health", "/actuator/health/**").permitAll() // 允许健康检查端点公开访问
                 .requestMatchers("/api/admin/auth/**").permitAll() // 允许管理员认证接口公开访问
                 .requestMatchers("/api/admin/**").permitAll() // 允许所有管理员接口访问（控制器内部会验证管理员权限）
 
@@ -50,6 +51,8 @@ public class SecurityConfig {
         return source;
     }
 }
+
+
 
 
 
