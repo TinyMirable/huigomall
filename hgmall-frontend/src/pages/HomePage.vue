@@ -42,7 +42,7 @@
         <!-- Product Grid with Category Selection -->
         <ProductGrid 
           :categories="homePageData.categoryProducts || []"
-          :active-category-id="selectedCategoryId"
+          :active-category-id="selectedCategoryId ?? undefined"
           @category-change="handleCategoryChange"
         >
           <template #bestseller-image>
@@ -84,7 +84,7 @@ import ProductCard from '../components/ProductCard.vue'
 import ProductGrid from '../components/ProductGrid.vue'
 import Footer from '../components/Footer.vue'
 import { apiGetHomePage } from '../api/product'
-import type { HomePageVO, ProductVO } from '../api/generated/models'
+import type { HomePageVO } from '../api/generated/models'
 
 const loading = ref(true)
 const error = ref<string | null>(null)
@@ -94,21 +94,22 @@ const homePageData = ref<HomePageVO>({
 })
 const selectedCategoryId = ref<number | string | null>(null)
 
-const categoryBgColors = ['bg-purple-50', 'bg-pink-50', 'bg-orange-50']
-const categoryIconBgs = ['bg-base-content', 'bg-pink-100', 'bg-pink-200']
-const categoryIconColors = ['text-white', 'text-pink-500', 'text-pink-600']
 
-function getCategoryBgColor(index: number): string {
-  return categoryBgColors[index % categoryBgColors.length]
-}
+// const categoryBgColors = ['bg-purple-50', 'bg-pink-50', 'bg-orange-50']
+// const categoryIconBgs = ['bg-base-content', 'bg-pink-100', 'bg-pink-200']
+// const categoryIconColors = ['text-white', 'text-pink-500', 'text-pink-600']
 
-function getCategoryIconBg(index: number): string {
-  return categoryIconBgs[index % categoryIconBgs.length]
-}
+// function getCategoryBgColor(index: number): string {
+//   return categoryBgColors[index % categoryBgColors.length] || categoryBgColors[0]
+// }
 
-function getCategoryIconColor(index: number): string {
-  return categoryIconColors[index % categoryIconColors.length]
-}
+// function getCategoryIconBg(index: number): string {
+//   return categoryIconBgs[index % categoryIconBgs.length] || categoryIconBgs[0]
+// }
+
+// function getCategoryIconColor(index: number): string {
+//   return categoryIconColors[index % categoryIconColors.length] || categoryIconColors[0]
+// }
 
 const currentCategoryProducts = computed(() => {
   // 如果分类商品列表为空，使用销量Top商品作为默认展示
@@ -154,8 +155,8 @@ async function loadHomePage() {
     const data = await apiGetHomePage()
     homePageData.value = data
     // 默认选择第一个分类
-    if (data.categoryProducts && data.categoryProducts.length > 0) {
-      selectedCategoryId.value = data.categoryProducts[0].categoryId || null
+    if (data.categoryProducts && data.categoryProducts.length > 0 && data.categoryProducts[0]) {
+      selectedCategoryId.value = data.categoryProducts[0].categoryId ?? null
     }
   } catch (e: any) {
     error.value = e.message || '加载首页数据失败'

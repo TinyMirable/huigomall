@@ -20,3 +20,8 @@ echo "查看日志: $DOCKER_COMPOSE logs -f"
 
 
 
+
+
+
+
+

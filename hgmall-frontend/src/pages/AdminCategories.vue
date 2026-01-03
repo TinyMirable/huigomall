@@ -142,7 +142,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import {
   apiGetCategoryTree,
   apiCreateCategory,
@@ -214,7 +214,7 @@ async function handleSubmit() {
     if (isEditMode.value && editingCategoryId.value) {
       await apiUpdateCategory(editingCategoryId.value, {
         name: categoryForm.value.name.trim(),
-        sortOrder: categoryForm.value.sortOrder
+        parentId: categoryForm.value.parentId
       })
       pushToast('更新分类成功', 'success')
     } else {

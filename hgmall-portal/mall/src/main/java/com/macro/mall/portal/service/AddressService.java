@@ -1,4 +1,4 @@
-package com.macro.mall.common.service;
+package com.macro.mall.portal.service;
 
 import com.macro.mall.common.domain.AddressVO;
 import com.macro.mall.mapper.AddressMapper;
@@ -216,9 +216,4 @@ public class AddressService {
         return vo;
     }
 }
-
-
-
-
-
 

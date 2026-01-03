@@ -140,7 +140,7 @@ interface Props {
   shops: ShopVO[]
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const loading = ref(false)
 const error = ref<string | null>(null)

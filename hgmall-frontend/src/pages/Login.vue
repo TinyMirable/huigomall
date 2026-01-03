@@ -133,8 +133,8 @@ const password = ref('')
 const contact = ref('')
 const code = ref('')
 const loading = ref(false)
-const codeLoading = ref(false)
-const countdown = ref(0)
+// const codeLoading = ref(false)
+// const countdown = ref(0)
 
 function pushToast(message: string, type: 'success' | 'error' = 'success') {
   const container = document.getElementById('global-toast')

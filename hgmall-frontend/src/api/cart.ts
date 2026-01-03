@@ -1,10 +1,11 @@
 import { CartControllerApi } from './generated/api'
 import { Configuration } from './generated/configuration'
 import type { AddCartItemRequest, UpdateCartItemRequest, CartItemVO } from './generated/models'
+import { getApiBasePath } from './config'
 
 // 创建购物车 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const cartApi = new CartControllerApi(config)

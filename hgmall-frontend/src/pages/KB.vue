@@ -2,7 +2,17 @@
 <script setup lang="ts">
 import { onMounted, ref, computed, watch, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { apiCreateKb, apiUpdateKb, apiListKb, apiListKbDocs, apiRebuildIndex, apiDeleteKb, type KbDocItem, type KbItem, type RebuildIndexResponse } from '../api/kb'
+// KB功能暂时注释，相关API未实现
+// import { apiCreateKb, apiUpdateKb, apiListKb, apiListKbDocs, apiRebuildIndex, apiDeleteKb, type KbDocItem, type KbItem, type RebuildIndexResponse } from '../api/kb'
+type KbItem = { id: string; name: string; description?: string; last_indexed_at?: string }
+type KbDocItem = any
+type RebuildIndexResponse = any
+const apiCreateKb = async (_: any) => {}
+const apiUpdateKb = async (_: any, __: any) => {}
+const apiListKb = async (): Promise<KbItem[]> => []
+const apiListKbDocs = async (_: any): Promise<KbDocItem[]> => []
+const apiRebuildIndex = async (_: any) => ({})
+const apiDeleteKb = async (_: any) => {}
 import KbListPanel from '../components/kb/KbListPanel.vue'
 import KbHeader from '../components/kb/KbHeader.vue'
 import KbDocTable from '../components/kb/KbDocTable.vue'
@@ -38,7 +48,7 @@ const deleting = ref(false)
 
 // 搜索逻辑下放到 KbListPanel 内部
 
-const activeKb = computed(() => kbList.value.find(k => k.id === activeKbId.value))
+const activeKb = computed(() => kbList.value.find((k: KbItem) => k.id === activeKbId.value))
 
 // 文档格式化逻辑已在 KbDocTable 内部处理
 
@@ -51,7 +61,7 @@ async function loadKb() {
     
     // 优先使用路由参数中的 kbId，否则使用列表第一个
     const routeKbId = route.query.kbId as string | undefined
-    if (routeKbId && list.some(kb => kb.id === routeKbId)) {
+    if (routeKbId && list.some((kb: KbItem) => kb.id === routeKbId)) {
       activeKbId.value = routeKbId
     } else {
       const first = list && list.length ? list[0] : undefined
@@ -66,7 +76,7 @@ async function loadKb() {
 
 // 监听路由参数变化，如果 kbId 改变则切换选中的知识库
 watch(() => route.query.kbId, (newKbId) => {
-  if (newKbId && typeof newKbId === 'string' && kbList.value.some(kb => kb.id === newKbId)) {
+  if (newKbId && typeof newKbId === 'string' && kbList.value.some((kb: KbItem) => kb.id === newKbId)) {
     if (activeKbId.value !== newKbId) {
       activeKbId.value = newKbId
       loadDocs()
@@ -270,7 +280,7 @@ onUnmounted(() => {
           :loading="loadingKb"
           :active-id="activeKbId"
           :search="search"
-          @update:search="val => search = val"
+          @update:search="(val: string) => { search = val }"
           @select="selectKb"
           @create="openCreateModal"
           @edit="handleEditFromList"
@@ -331,7 +341,7 @@ onUnmounted(() => {
   <CreateKbModal
     v-model="createModalOpen"
     :creating="creating"
-    @submit="(p) => { createForm = p; submitCreate() }"
+    @submit="(p: any) => { createForm = p; submitCreate() }"
   />
 
   <!-- 编辑知识库弹窗 -->
@@ -339,7 +349,7 @@ onUnmounted(() => {
     v-model="editModalOpen"
     :kb="activeKb"
     :updating="updating"
-    @submit="(p) => { editForm = p; submitEdit() }"
+    @submit="(p: any) => { editForm = p; submitEdit() }"
   />
 
   <!-- 文件上传弹窗 -->

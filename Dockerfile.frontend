@@ -3,8 +3,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# 安装 curl（用于健康检查）
-RUN apk add --no-cache curl
+# 安装 curl（用于健康检查）、bash（脚本需要）和 openjdk（OpenAPI Generator 需要）
+RUN apk add --no-cache curl bash openjdk17-jre
 
 # 复制 package 文件
 COPY hgmall-frontend/package*.json ./
@@ -15,17 +15,17 @@ RUN npm ci
 # 复制源代码
 COPY hgmall-frontend .
 
-# 复制 API 生成脚本
-COPY scripts/generate-api.sh /app/scripts/
-RUN chmod +x /app/scripts/generate-api.sh
+# 复制 API 生成脚本（必须在复制源代码之后）
+COPY scripts/generate-api.sh /app/generate-api.sh
+RUN chmod +x /app/generate-api.sh
 
 # 创建启动脚本
 RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'set -e' >> /app/start.sh && \
     echo 'echo "等待后端服务启动并生成 API 代码..."' >> /app/start.sh && \
-    echo '/app/scripts/generate-api.sh' >> /app/start.sh && \
+    echo '/app/generate-api.sh' >> /app/start.sh && \
     echo 'echo "构建前端应用..."' >> /app/start.sh && \
-    echo 'npm run build' >> /app/start.sh && \
+    echo 'npx vite build' >> /app/start.sh && \
     echo 'echo "启动前端服务..."' >> /app/start.sh && \
     echo 'npm install -g serve' >> /app/start.sh && \
     echo 'exec serve -s dist -l 3000' >> /app/start.sh && \

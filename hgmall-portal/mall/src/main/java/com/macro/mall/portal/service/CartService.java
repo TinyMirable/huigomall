@@ -1,4 +1,4 @@
-package com.macro.mall.common.service;
+package com.macro.mall.portal.service;
 
 import com.macro.mall.common.constant.ProductStatus;
 import com.macro.mall.common.constant.ShopStatus;

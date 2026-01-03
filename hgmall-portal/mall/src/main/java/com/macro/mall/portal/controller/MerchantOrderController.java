@@ -5,7 +5,7 @@ import com.macro.mall.common.domain.MerchantOrderListVO;
 import com.macro.mall.common.domain.MerchantOrderVO;
 import com.macro.mall.common.domain.OrderStatisticsVO;
 import com.macro.mall.common.domain.ShipOrderRequest;
-import com.macro.mall.common.service.MerchantOrderService;
+import com.macro.mall.portal.service.MerchantOrderService;
 import com.macro.mall.common.service.ShopService;
 import com.macro.mall.common.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

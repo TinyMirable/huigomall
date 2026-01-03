@@ -7,7 +7,7 @@ import com.macro.mall.common.domain.UpdatePhoneRequest;
 import com.macro.mall.common.domain.UpdateUsernameRequest;
 import com.macro.mall.common.domain.UpdateUsernameResponse;
 import com.macro.mall.common.domain.UserSummaryVO;
-import com.macro.mall.common.service.UserService;
+import com.macro.mall.portal.service.UserService;
 import com.macro.mall.common.util.JwtUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

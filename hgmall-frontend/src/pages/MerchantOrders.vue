@@ -189,7 +189,7 @@
             </button>
             <button
               class="btn btn-ghost"
-              @click="viewOrderDetail(order.orderId)"
+              @click="order.orderId !== undefined ? viewOrderDetail(order.orderId) : undefined"
             >
               查看详情
             </button>
@@ -351,7 +351,7 @@ interface Props {
   shops: ShopVO[]
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const loading = ref(false)
 const error = ref<string | null>(null)
@@ -527,6 +527,11 @@ onMounted(() => {
 
 <style scoped>
 </style>
+
+
+
+
+
 
 
 

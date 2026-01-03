@@ -58,7 +58,7 @@
             <!-- 价格 -->
             <div class="flex items-baseline gap-4">
               <span class="text-4xl font-bold" style="color: rgb(255, 202, 57);">
-                ¥{{ selectedSku?.price || (productDetail.skus && productDetail.skus.length > 0 ? productDetail.skus[0].price : 0) }}
+                ¥{{ selectedSku?.price || (productDetail.skus && productDetail.skus.length > 0 ? (productDetail.skus[0]?.price ?? 0) : 0) }}
               </span>
               <span v-if="productDetail.sales !== undefined" class="text-base-content/60">
                 已售 {{ productDetail.sales }} 件
@@ -67,7 +67,7 @@
 
             <!-- SKU选择 -->
             <div v-if="productDetail.skus && productDetail.skus.length > 0" class="space-y-4">
-              <div v-for="(sku, index) in productDetail.skus" :key="sku.skuId">
+              <div v-for="sku in productDetail.skus" :key="sku.skuId">
                 <div class="flex items-center justify-between p-4 border rounded-lg cursor-pointer transition-all"
                      :class="selectedSku?.skuId === sku.skuId ? 'border-primary bg-primary/5' : 'border-base-300 hover:border-primary/50'"
                      @click="selectSku(sku)">
@@ -321,7 +321,7 @@ async function loadProductDetail() {
     
     // 默认选择第一个SKU
     if (productDetail.value.skus && productDetail.value.skus.length > 0) {
-      selectedSku.value = productDetail.value.skus[0]
+      selectedSku.value = productDetail.value.skus[0] ?? null
       quantity.value = 1
     }
     

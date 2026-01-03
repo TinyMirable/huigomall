@@ -1019,21 +1019,21 @@ function buildSpecJson(specs: Array<{ key: string; value: string }>): string {
 
 // 将JSON字符串转换为规格属性数组（保留以便将来使用）
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function parseSpecJson(specJson?: string): Array<{ key: string; value: string }> {
-  if (!specJson) return [{ key: '', value: '' }]
-  try {
-    const parsed = JSON.parse(specJson)
-    if (typeof parsed === 'object' && parsed !== null) {
-      return Object.entries(parsed).map(([key, value]) => ({
-        key: key,
-        value: String(value)
-      }))
-    }
-  } catch (e) {
-    console.error('Failed to parse spec JSON:', e)
-  }
-  return [{ key: '', value: '' }]
-}
+// function parseSpecJson(specJson?: string): Array<{ key: string; value: string }> {
+//   if (!specJson) return [{ key: '', value: '' }]
+//   try {
+//     const parsed = JSON.parse(specJson)
+//     if (typeof parsed === 'object' && parsed !== null) {
+//       return Object.entries(parsed).map(([key, value]) => ({
+//         key: key,
+//         value: String(value)
+//       }))
+//     }
+//   } catch (e) {
+//     console.error('Failed to parse spec JSON:', e)
+//   }
+//   return [{ key: '', value: '' }]
+// }
 
 // 发送验证码
 async function sendCode(emailAddr: string): Promise<void> {

@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import VerificationCodeInput from './VerificationCodeInput.vue'
-import type { ShopProductVO } from '../api/generated/models'
+// import type { ShopProductVO } from '../api/generated/models'
 
 const props = defineProps<{
   modelValue: boolean
@@ -99,6 +99,11 @@ defineExpose({
 
 <style scoped>
 </style>
+
+
+
+
+
 
 
 

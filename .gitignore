@@ -64,10 +64,16 @@ $RECYCLE.BIN/
 /docs/sql/insert_test_products.sql
 /docs/sql/schema.sql
 /docs/sql/add_category_unique_constraint.sql
+/docs/sql/fix_accounts.sql
+/docs/sql/check_accounts.sql   
 
 # Application properties (contains sensitive config)
 /hgmall-portal/mall/src/main/resources/application.properties
 /hgmall-admin/src/main/resources/application.properties
 /hgmall-common/src/main/resources/application.properties
+/hgmall-mbg/src/main/resources/generator.properties
 /hgmall-frontend/src/api/generated/
 /hgmall-frontend/src/api/generated-admin/
+.cursorignore
+
+/report

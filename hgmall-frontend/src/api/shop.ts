@@ -1,10 +1,11 @@
 import { MerchantShopControllerApi, ShopControllerApi } from './generated/api'
 import { Configuration } from './generated/configuration'
 import type { CreateShopRequest, CloseShopRequest, UpdateShopRequest, ResumeShopRequest, ShopVO } from './generated/models'
+import { getApiBasePath } from './config'
 
 // 创建店铺 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const merchantShopApi = new MerchantShopControllerApi(config)

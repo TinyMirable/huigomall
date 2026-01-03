@@ -4,7 +4,7 @@ import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.common.domain.AddCartItemRequest;
 import com.macro.mall.common.domain.CartItemVO;
 import com.macro.mall.common.domain.UpdateCartItemRequest;
-import com.macro.mall.common.service.CartService;
+import com.macro.mall.portal.service.CartService;
 import com.macro.mall.common.util.JwtUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -180,6 +180,11 @@ public class CartController {
         return JwtUtil.getUserIdFromToken(token);
     }
 }
+
+
+
+
+
 
 
 

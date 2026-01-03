@@ -1,7 +1,8 @@
-package com.macro.mall.common.service;
+package com.macro.mall.portal.service;
 
 import com.macro.mall.common.constant.OrderStatus;
 import com.macro.mall.common.domain.*;
+import com.macro.mall.common.service.ShopService;
 import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,16 @@ public class MerchantOrderService {
         // 获取商家所有店铺ID
         List<Long> shopIds = getMerchantShopIds(merchantId, shopId);
 
+        // 如果商家没有店铺，返回空列表
+        if (shopIds == null || shopIds.isEmpty()) {
+            MerchantOrderListVO result = new MerchantOrderListVO();
+            result.setOrders(new ArrayList<>());
+            result.setTotal(0L);
+            result.setPage(page != null && page > 0 ? page : 1);
+            result.setSize(size != null && size > 0 ? size : 20);
+            return result;
+        }
+
         // 分页参数
         if (page == null || page < 1) {
             page = 1;
@@ -115,7 +126,7 @@ public class MerchantOrderService {
             return cached;
         }
 
-        // 查询订单列表
+        // 查询订单列表（只查询商家店铺的订单）
         List<Map<String, Object>> orderMaps = orderMapper.selectMerchantOrdersWithPaging(
                 shopIds, status, startTime, endTime, offset, size);
         Long total = orderMapper.countMerchantOrders(shopIds, status, startTime, endTime);

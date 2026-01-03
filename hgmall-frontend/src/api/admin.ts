@@ -9,7 +9,6 @@ import {
 } from './generated-admin/api'
 import { Configuration } from './generated-admin/configuration'
 import type {
-  MerchantListVO,
   MerchantVO,
   UserListVO,
   UserVO,
@@ -25,12 +24,16 @@ import type {
   CreateCategoryRequest,
   UpdateCategoryRequest,
   CancelOrderRequest,
-  UpdateConfigRequest
+  UpdateConfigRequest,
+  ShopListVO
 } from './generated-admin/models'
+
+import { getAdminApiBasePath } from './config'
+import axios from 'axios'
 
 // 创建管理员 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_ADMIN_API_BASE_URL || 'http://localhost:8081',
+  basePath: getAdminApiBasePath(),
 })
 
 const merchantApi = new AdminMerchantControllerApi(config)
@@ -56,15 +59,21 @@ export async function apiGetMerchants(params: {
   keyword?: string
   page?: number
   size?: number
-}): Promise<MerchantListVO> {
+}): Promise<{ merchants: MerchantVO[]; total: number; page: number; size: number }> {
   const authorization = getAuthorization()
-  const response = await merchantApi.getMerchantList(
-    params.status,
-    params.keyword,
-    params.page,
-    params.size,
-    authorization
-  )
+  // TODO: 后端API中缺少getMerchantList方法，需要添加或使用其他方法
+  // 临时解决方案：使用axios直接调用
+  const response = await axios.get(`${getAdminApiBasePath()}/api/admin/merchants`, {
+    params: {
+      status: params.status,
+      keyword: params.keyword,
+      page: params.page,
+      size: params.size
+    },
+    headers: {
+      Authorization: authorization
+    }
+  })
   const result = response.data
   if (result.code !== 200 && result.code !== 0) {
     throw new Error(result.message || '获取商家列表失败')

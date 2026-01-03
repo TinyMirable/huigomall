@@ -20,7 +20,10 @@
       <button
         type="button"
         class="btn btn-outline"
-        :class="{ 'btn-disabled': loading || countdown > 0, ...buttonClass }"
+        :class="[
+          { 'btn-disabled': loading || countdown > 0 },
+          typeof props.buttonClass === 'string' ? props.buttonClass : props.buttonClass
+        ]"
         @click="handleSendCode"
       >
         {{ countdown > 0 ? `${countdown}秒` : buttonText }}

@@ -3,17 +3,18 @@ import { AdminAuthControllerApi } from './generated-admin/api'
 import { Configuration } from './generated/configuration'
 import { Configuration as AdminConfiguration } from './generated-admin/configuration'
 import type { LoginRequest, CodeLoginRequest, RegisterRequest, VerificationCodeRequest, ForgotPasswordRequest, ChangePasswordRequest, MerchantRegisterRequest } from './generated/models'
+import { getApiBasePath, getAdminApiBasePath } from './config'
 
 // 创建普通用户 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const authApi = new AuthControllerApi(config)
 
 // 创建管理员 API 实例
 const adminConfig = new AdminConfiguration({
-  basePath: import.meta.env.VITE_ADMIN_API_BASE_URL || 'http://localhost:8081',
+  basePath: getAdminApiBasePath(),
 })
 
 const adminAuthApi = new AdminAuthControllerApi(adminConfig)
@@ -210,7 +211,7 @@ export async function apiRegisterMerchant(payload: { merchantName: string; owner
 }
 
 // 获取当前用户信息（需要 token）
-export async function apiMe(token: string): Promise<{ username: string; email: string; userId: number }> {
+export async function apiMe(_token: string): Promise<{ username: string; email: string; userId: number }> {
   // 这里需要根据实际的 API 实现
   // 暂时返回一个模拟的用户信息
   // 实际应该调用获取用户信息的 API

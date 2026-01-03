@@ -1,10 +1,11 @@
 import { OrderControllerApi } from './generated/api'
 import { Configuration } from './generated/configuration'
 import type { CreateOrderRequest, PayOrderRequest, BatchOrderVO } from './generated/models'
+import { getApiBasePath } from './config'
 
 // 创建订单 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const orderApi = new OrderControllerApi(config)

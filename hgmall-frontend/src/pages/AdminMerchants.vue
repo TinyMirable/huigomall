@@ -183,7 +183,7 @@
                 :key="shop.shopId"
                 class="p-3 bg-base-200 rounded-lg"
               >
-                <p class="font-semibold">{{ shop.shopName }}</p>
+                <p class="font-semibold">{{ shop.name }}</p>
                 <p class="text-sm text-base-content/60">店铺ID：{{ shop.shopId }}</p>
               </div>
             </div>
@@ -218,11 +218,11 @@ import {
   apiAuditMerchant,
   apiUpdateMerchantStatus
 } from '../api/admin'
-import type { MerchantListVO, MerchantVO } from '../api/generated-admin/models'
+import type { MerchantVO } from '../api/generated-admin/models'
 
 const loading = ref(false)
 const error = ref<string | null>(null)
-const merchantList = ref<MerchantListVO>({ merchants: [], total: 0, page: 1, size: 20 })
+const merchantList = ref<{ merchants: MerchantVO[]; total: number; page: number; size: number }>({ merchants: [], total: 0, page: 1, size: 20 })
 const selectedMerchant = ref<MerchantVO | null>(null)
 
 const filters = ref({

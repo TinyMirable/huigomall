@@ -1,10 +1,11 @@
-package com.macro.mall.common.service;
+package com.macro.mall.portal.service;
 
 import com.macro.mall.common.constant.OrderStatus;
 import com.macro.mall.common.constant.ProductStatus;
 import com.macro.mall.common.constant.ShopStatus;
 import com.macro.mall.common.constant.UserStatus;
 import com.macro.mall.common.domain.*;
+import com.macro.mall.common.service.EmailService;
 import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
 import org.springframework.beans.factory.annotation.Autowired;

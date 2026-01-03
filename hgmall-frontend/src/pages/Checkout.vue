@@ -307,7 +307,7 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import { apiGetAddressList } from '../api/address'
 import { apiGetCartItems } from '../api/cart'
-import { apiCreateOrder, apiPayOrder, apiCancelOrder, apiGetBatchOrder } from '../api/order'
+import { apiCreateOrder, apiPayOrder, apiCancelOrder } from '../api/order'
 import type { AddressVO } from '../api/generated/models/address-vo'
 import type { CartItemVO } from '../api/generated/models/cart-item-vo'
 import type { BatchOrderVO } from '../api/generated/models/batch-order-vo'
@@ -406,7 +406,7 @@ async function loadData() {
     addresses.value = await apiGetAddressList()
     if (addresses.value.length > 0) {
       const defaultAddress = addresses.value.find(addr => addr.isDefault)
-      selectedAddressId.value = defaultAddress?.addressId || addresses.value[0].addressId || null
+      selectedAddressId.value = defaultAddress?.addressId || (addresses.value[0]?.addressId ?? null)
     }
 
     // 加载商品数据
@@ -545,7 +545,7 @@ async function handlePayOrder() {
 
   paying.value = true
   try {
-    const result = await apiPayOrder(batchOrder.value.batchOrderId)
+    await apiPayOrder(batchOrder.value.batchOrderId)
     // 跳转到支付成功页面
     router.push({
       path: '/payment-success',

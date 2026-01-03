@@ -1,10 +1,11 @@
 import { CategoryControllerApi } from './generated/api'
 import { Configuration } from './generated/configuration'
 import type { Category, CategoryVO } from './generated/models'
+import { getApiBasePath } from './config'
 
 // 创建分类 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const categoryApi = new CategoryControllerApi(config)

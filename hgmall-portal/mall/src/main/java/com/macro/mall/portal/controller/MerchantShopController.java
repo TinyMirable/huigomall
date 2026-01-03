@@ -6,7 +6,7 @@ import com.macro.mall.common.domain.CreateShopRequest;
 import com.macro.mall.common.domain.ResumeShopRequest;
 import com.macro.mall.common.domain.UpdateShopRequest;
 import com.macro.mall.common.domain.ShopVO;
-import com.macro.mall.common.service.SensitiveOperationService;
+import com.macro.mall.portal.service.SensitiveOperationService;
 import com.macro.mall.common.service.ShopService;
 import com.macro.mall.common.util.JwtUtil;
 import jakarta.validation.Valid;

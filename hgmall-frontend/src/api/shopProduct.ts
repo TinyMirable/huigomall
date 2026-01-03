@@ -13,9 +13,11 @@ import type {
   SkuVO
 } from './generated/models'
 
+import { getApiBasePath } from './config'
+
 // 创建店铺商品 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const shopProductApi = new ShopProductControllerApi(config)

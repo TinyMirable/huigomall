@@ -547,7 +547,7 @@ async function handleRegisterMerchant() {
       merchantName: trimmedMerchantName,
       owner: registerMerchantForm.value.owner?.trim() || undefined
     })
-    pushToast('商家注册申请已提交，请等待审核', 'success')
+    pushToast('商家注册成功！', 'success')
     showRegisterMerchantModal.value = false
     registerMerchantForm.value = {
       merchantName: '',
@@ -609,21 +609,30 @@ async function handleChangePassword() {
 }
 
 function handleOrderManagement() {
-  pushToast('订单管理功能开发中', 'error')
+  router.push('/orders')
 }
 
 function handleAddressManagement() {
-  router.push('/addresses')
+  try {
+    router.push('/addresses').catch((err) => {
+      console.error('路由跳转失败:', err)
+      // 如果路由跳转失败，尝试使用 window.location
+      window.location.href = '/addresses'
+    })
+  } catch (error) {
+    console.error('跳转地址管理失败:', error)
+    window.location.href = '/addresses'
+  }
 }
 
 function handleCoupons() {
   pushToast('优惠券功能开发中', 'error')
 }
 
-function handleEditProfile() {
-  // 保留此函数以保持向后兼容，但实际功能已通过独立的编辑按钮实现
-  pushToast('请点击手机号或邮箱旁的编辑按钮进行修改', 'error')
-}
+// function handleEditProfile() {
+//   // 保留此函数以保持向后兼容，但实际功能已通过独立的编辑按钮实现
+//   pushToast('请点击手机号或邮箱旁的编辑按钮进行修改', 'error')
+// }
 
 function openUpdateEmailModal() {
   updateEmailForm.value.email = userSummary.value.email || userInfo.value.email || ''

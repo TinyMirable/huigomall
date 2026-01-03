@@ -4,7 +4,7 @@ import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.common.domain.AddressVO;
 import com.macro.mall.common.domain.CreateAddressRequest;
 import com.macro.mall.common.domain.UpdateAddressRequest;
-import com.macro.mall.common.service.AddressService;
+import com.macro.mall.portal.service.AddressService;
 import com.macro.mall.common.util.JwtUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -247,6 +247,11 @@ public class AddressController {
         return trimmed;
     }
 }
+
+
+
+
+
 
 
 

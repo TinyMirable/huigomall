@@ -1,6 +1,8 @@
-package com.macro.mall.common.service;
+package com.macro.mall.portal.service;
 
 import com.macro.mall.common.domain.UserSummaryVO;
+import com.macro.mall.common.service.VerificationCodeSenderService;
+import com.macro.mall.common.service.VerificationCodeService;
 import com.macro.mall.mapper.MerchantMapper;
 import com.macro.mall.mapper.OrderMapper;
 import com.macro.mall.mapper.RoleMapper;

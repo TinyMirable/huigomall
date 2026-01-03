@@ -4,7 +4,7 @@ import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.common.domain.HomePageVO;
 import com.macro.mall.common.domain.ProductDetailVO;
 import com.macro.mall.common.domain.ProductListVO;
-import com.macro.mall.common.service.ProductService;
+import com.macro.mall.portal.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,6 +1,6 @@
-import { Configuration } from './generated/configuration'
 import axios from 'axios'
 import type { AddressVO } from './generated/models/address-vo'
+import { getApiBasePath } from './config'
 
 // 类型定义
 export interface CreateAddressRequest {
@@ -17,10 +17,8 @@ export interface UpdateAddressRequest {
   isDefault?: boolean
 }
 
-// 创建API配置
-const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
-})
+// 获取 API 基础路径
+const apiBasePath = getApiBasePath()
 
 // 获取Authorization header
 function getAuthorization(): string {
@@ -34,7 +32,7 @@ function getAuthorization(): string {
 // 获取地址列表
 export async function apiGetAddressList(): Promise<AddressVO[]> {
   const authorization = getAuthorization()
-  const response = await axios.get(`${config.basePath}/api/addresses`, {
+  const response = await axios.get(`${apiBasePath}/api/addresses`, {
     headers: {
       'Authorization': authorization
     }
@@ -51,7 +49,7 @@ export async function apiGetAddressList(): Promise<AddressVO[]> {
 // 获取单个地址详情
 export async function apiGetAddress(addressId: number): Promise<AddressVO> {
   const authorization = getAuthorization()
-  const response = await axios.get(`${config.basePath}/api/addresses/${addressId}`, {
+  const response = await axios.get(`${apiBasePath}/api/addresses/${addressId}`, {
     headers: {
       'Authorization': authorization
     }
@@ -72,7 +70,7 @@ export async function apiGetAddress(addressId: number): Promise<AddressVO> {
 // 创建地址
 export async function apiCreateAddress(request: CreateAddressRequest): Promise<AddressVO> {
   const authorization = getAuthorization()
-  const response = await axios.post(`${config.basePath}/api/addresses`, request, {
+  const response = await axios.post(`${apiBasePath}/api/addresses`, request, {
     headers: {
       'Authorization': authorization,
       'Content-Type': 'application/json'
@@ -94,7 +92,7 @@ export async function apiCreateAddress(request: CreateAddressRequest): Promise<A
 // 更新地址
 export async function apiUpdateAddress(addressId: number, request: UpdateAddressRequest): Promise<AddressVO> {
   const authorization = getAuthorization()
-  const response = await axios.put(`${config.basePath}/api/addresses/${addressId}`, request, {
+  const response = await axios.put(`${apiBasePath}/api/addresses/${addressId}`, request, {
     headers: {
       'Authorization': authorization,
       'Content-Type': 'application/json'
@@ -116,7 +114,7 @@ export async function apiUpdateAddress(addressId: number, request: UpdateAddress
 // 删除地址
 export async function apiDeleteAddress(addressId: number): Promise<void> {
   const authorization = getAuthorization()
-  const response = await axios.delete(`${config.basePath}/api/addresses/${addressId}`, {
+  const response = await axios.delete(`${apiBasePath}/api/addresses/${addressId}`, {
     headers: {
       'Authorization': authorization
     }
@@ -131,7 +129,7 @@ export async function apiDeleteAddress(addressId: number): Promise<void> {
 // 设置默认地址
 export async function apiSetDefaultAddress(addressId: number): Promise<AddressVO> {
   const authorization = getAuthorization()
-  const response = await axios.put(`${config.basePath}/api/addresses/${addressId}/set-default`, {}, {
+  const response = await axios.put(`${apiBasePath}/api/addresses/${addressId}/set-default`, {}, {
     headers: {
       'Authorization': authorization,
       'Content-Type': 'application/json'

@@ -1,5 +1,6 @@
-package com.macro.mall.common.service;
+package com.macro.mall.portal.service;
 
+import com.macro.mall.common.service.VerificationCodeService;
 import com.macro.mall.mapper.UsrMapper;
 import com.macro.mall.model.Usr;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,7 +14,7 @@ import com.macro.mall.common.domain.AddSkuRequest;
 import com.macro.mall.common.domain.SkuVO;
 import java.util.List;
 import com.macro.mall.common.service.ProductManagementService;
-import com.macro.mall.common.service.SensitiveOperationService;
+import com.macro.mall.portal.service.SensitiveOperationService;
 import com.macro.mall.common.service.ShopService;
 import com.macro.mall.common.util.JwtUtil;
 import com.macro.mall.mapper.RoleMapper;

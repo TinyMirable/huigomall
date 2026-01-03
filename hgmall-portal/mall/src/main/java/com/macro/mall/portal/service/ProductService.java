@@ -1,4 +1,4 @@
-package com.macro.mall.common.service;
+package com.macro.mall.portal.service;
 
 import com.macro.mall.common.domain.*;
 import com.macro.mall.common.domain.SkuVO;
@@ -16,6 +16,7 @@ import com.macro.mall.model.Product;
 import com.macro.mall.model.Shop;
 import com.macro.mall.model.Sku;
 import com.macro.mall.model.SkuExample;
+import com.macro.mall.common.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;

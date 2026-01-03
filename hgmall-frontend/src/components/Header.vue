@@ -462,7 +462,7 @@ async function handleRegisterMerchant() {
       merchantName: trimmedMerchantName,
       owner: registerMerchantForm.value.owner?.trim() || undefined
     })
-    pushToast('商家注册申请已提交，请等待审核', 'success')
+    pushToast('商家注册成功！', 'success')
     showRegisterMerchantModal.value = false
     registerMerchantForm.value = {
       merchantName: '',

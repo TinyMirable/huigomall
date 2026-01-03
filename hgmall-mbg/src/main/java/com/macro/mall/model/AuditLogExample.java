@@ -256,62 +256,62 @@ public class AuditLogExample {
         }
 
         public Criteria andAdminUsrIdIsNull() {
-            addCriterion("admin_usr_id is null");
+            addCriterion("admin_user_id is null");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdIsNotNull() {
-            addCriterion("admin_usr_id is not null");
+            addCriterion("admin_user_id is not null");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdEqualTo(Long value) {
-            addCriterion("admin_usr_id =", value, "adminUsrId");
+            addCriterion("admin_user_id =", value, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdNotEqualTo(Long value) {
-            addCriterion("admin_usr_id <>", value, "adminUsrId");
+            addCriterion("admin_user_id <>", value, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdGreaterThan(Long value) {
-            addCriterion("admin_usr_id >", value, "adminUsrId");
+            addCriterion("admin_user_id >", value, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("admin_usr_id >=", value, "adminUsrId");
+            addCriterion("admin_user_id >=", value, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdLessThan(Long value) {
-            addCriterion("admin_usr_id <", value, "adminUsrId");
+            addCriterion("admin_user_id <", value, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdLessThanOrEqualTo(Long value) {
-            addCriterion("admin_usr_id <=", value, "adminUsrId");
+            addCriterion("admin_user_id <=", value, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdIn(List<Long> values) {
-            addCriterion("admin_usr_id in", values, "adminUsrId");
+            addCriterion("admin_user_id in", values, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdNotIn(List<Long> values) {
-            addCriterion("admin_usr_id not in", values, "adminUsrId");
+            addCriterion("admin_user_id not in", values, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdBetween(Long value1, Long value2) {
-            addCriterion("admin_usr_id between", value1, value2, "adminUsrId");
+            addCriterion("admin_user_id between", value1, value2, "adminUsrId");
             return (Criteria) this;
         }
 
         public Criteria andAdminUsrIdNotBetween(Long value1, Long value2) {
-            addCriterion("admin_usr_id not between", value1, value2, "adminUsrId");
+            addCriterion("admin_user_id not between", value1, value2, "adminUsrId");
             return (Criteria) this;
         }
 

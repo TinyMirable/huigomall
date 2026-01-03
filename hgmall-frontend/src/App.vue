@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 
 
 const route = useRoute()
-const hideNavOnLogin = computed(() => route.name === 'login')
+// const hideNavOnLogin = computed(() => route.name === 'login')
 const hideFooterOnChat = computed(() => route.name === 'chat')
 </script>
 

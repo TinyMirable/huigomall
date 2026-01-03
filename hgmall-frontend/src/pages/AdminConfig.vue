@@ -32,7 +32,7 @@
               type="checkbox"
               class="toggle toggle-primary"
               :checked="config.merchantAuditEnabled"
-              @change="updateMerchantAuditConfig($event.target.checked)"
+              @change="updateMerchantAuditConfig(($event.target as HTMLInputElement).checked)"
               :disabled="updating"
             />
           </div>
@@ -49,7 +49,7 @@
               type="checkbox"
               class="toggle toggle-primary"
               :checked="config.shopAuditEnabled"
-              @change="updateShopAuditConfig($event.target.checked)"
+              @change="updateShopAuditConfig(($event.target as HTMLInputElement).checked)"
               :disabled="updating"
             />
           </div>
@@ -141,6 +141,11 @@ onMounted(() => {
 
 <style scoped>
 </style>
+
+
+
+
+
 
 
 

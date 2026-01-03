@@ -1,10 +1,11 @@
 import { ProductControllerApi } from './generated/api'
 import { Configuration } from './generated/configuration'
 import type { HomePageVO, ProductListVO, ProductDetailVO } from './generated/models'
+import { getApiBasePath } from './config'
 
 // 创建产品 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const productApi = new ProductControllerApi(config)

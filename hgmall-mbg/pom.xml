@@ -70,7 +70,6 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -148,6 +147,16 @@
 					</excludes>
 					<!-- 同时生成普通 jar 和可执行 jar -->
 					<!-- <classifier>boot</classifier> -->
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<mainClass>com.macro.mall.AccountGenerator</mainClass>
+					<classpathScope>compile</classpathScope>
 				</configuration>
 			</plugin>
 			

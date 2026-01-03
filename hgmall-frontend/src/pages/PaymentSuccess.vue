@@ -166,15 +166,15 @@ const loading = ref(false)
 const error = ref<string | null>(null)
 const batchOrder = ref<BatchOrderVO | null>(null)
 
-function pushToast(message: string, type: 'success' | 'error' = 'success') {
-  const container = document.getElementById('global-toast')
-  if (!container) return
-  const el = document.createElement('div')
-  el.className = `alert ${type === 'success' ? 'alert-success' : 'alert-error'}`
-  el.innerHTML = `<span>${message}</span>`
-  container.appendChild(el)
-  setTimeout(() => el.remove(), 2500)
-}
+// function pushToast(message: string, type: 'success' | 'error' = 'success') {
+//   const container = document.getElementById('global-toast')
+//   if (!container) return
+//   const el = document.createElement('div')
+//   el.className = `alert ${type === 'success' ? 'alert-success' : 'alert-error'}`
+//   el.innerHTML = `<span>${message}</span>`
+//   container.appendChild(el)
+//   setTimeout(() => el.remove(), 2500)
+// }
 
 function formatSpec(spec?: string): string {
   if (!spec) return ''
@@ -238,6 +238,11 @@ onMounted(() => {
 
 <style scoped>
 </style>
+
+
+
+
+
 
 
 

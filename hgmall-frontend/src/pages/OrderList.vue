@@ -315,12 +315,12 @@ function handlePayOrder(batchOrderId: number) {
   })
 }
 
-function handleConfirmReceive(batchOrderId: number) {
+function handleConfirmReceive(_batchOrderId: number) {
   // TODO: 实现确认收货功能
   pushToast('确认收货功能开发中', 'info')
 }
 
-function viewOrderDetail(batchOrderId: number) {
+function viewOrderDetail(_batchOrderId: number) {
   // TODO: 跳转到订单详情页面
   pushToast('订单详情功能开发中', 'info')
   // router.push(`/order/${batchOrderId}`)

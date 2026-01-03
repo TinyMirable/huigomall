@@ -1,10 +1,11 @@
 import { UserControllerApi } from './generated/api'
 import { Configuration } from './generated/configuration'
-import type { UserSummaryVO, UpdateUsernameRequest, UpdateUsernameResponse, UpdateEmailRequest, UpdatePhoneRequest, SendEmailCodeRequest } from './generated/models'
+import type { UserSummaryVO, UpdateUsernameRequest, UpdateEmailRequest, UpdatePhoneRequest, SendEmailCodeRequest } from './generated/models'
+import { getApiBasePath } from './config'
 
 // 创建用户 API 实例
 const config = new Configuration({
-  basePath: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080',
+  basePath: getApiBasePath(),
 })
 
 const userApi = new UserControllerApi(config)
@@ -52,7 +53,7 @@ export async function apiUpdateUsername(username: string): Promise<{ username: s
     throw new Error(result.message || '修改用户名失败')
   }
   
-  if (!result.data) {
+  if (!result.data || !result.data.username) {
     throw new Error('修改用户名响应中缺少数据')
   }
   
