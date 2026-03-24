@@ -10,7 +10,7 @@
 [![Docker](https://img.shields.io/badge/Docker-支持-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Redis](https://img.shields.io/badge/Redis-7.x-red?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
 
-代码的架构借鉴自[mall]("https://github.com/macrozheng/mall/tree/master")
+代码的架构借鉴自[mall]("https://github.com/huigozheng/mall/tree/master")
 
 scut网络应用架构课程作品
 

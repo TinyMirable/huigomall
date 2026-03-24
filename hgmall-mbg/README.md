@@ -23,12 +23,12 @@ mvn mybatis-generator:generate
 
 ```bash
 cd hgmall-mbg
-mvn compile exec:java -Dexec.mainClass="com.macro.mall.Generator"
+mvn compile exec:java -Dexec.mainClass="com.huigo.mall.Generator"
 ```
 
 ### 方法三：在 IDE 中运行
 
-直接运行 `com.macro.mall.Generator` 类的 `main` 方法。
+直接运行 `com.huigo.mall.Generator` 类的 `main` 方法。
 
 ## 配置说明
 
@@ -75,8 +75,8 @@ delete from "user"
 
 生成的文件位于：
 
-- **Model 类**：`src/main/java/com/macro/mall/model/`
-- **Mapper 接口**：`src/main/java/com/macro/mall/mapper/`
+- **Model 类**：`src/main/java/com/huigo/mall/model/`
+- **Mapper 接口**：`src/main/java/com/huigo/mall/mapper/`
 - **Mapper XML**：`src/main/resources/mapper/`
 
 ## 常见问题

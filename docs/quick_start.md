@@ -26,7 +26,7 @@ psql -U postgres -d hgmall_db -f docs/sql/init.sql
 
 ```sh
 cd hgmall-mbg
-mvn exec:java -Dexec.mainClass="com.macro.mall.AccountGenerator"
+mvn exec:java -Dexec.mainClass="com.huigo.mall.AccountGenerator"
 ```
 
 **生成的账号信息：**

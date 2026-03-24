@@ -8,7 +8,7 @@
 		<version>4.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.macro</groupId>
+	<groupId>com.huigo</groupId>
 	<artifactId>hgmall_security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hgmall_security</name>

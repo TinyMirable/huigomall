@@ -47,11 +47,11 @@ mvn clean compile -DskipTests
 
 echo "运行账号生成器..."
 # 使用 runtime scope 确保包含所有依赖（包括 PostgreSQL 驱动）
-mvn exec:java -Dexec.mainClass="com.macro.mall.AccountGenerator" -Dexec.classpathScope=runtime || {
+mvn exec:java -Dexec.mainClass="com.huigo.mall.AccountGenerator" -Dexec.classpathScope=runtime || {
   echo "使用备用方式运行账号生成器..."
   # 构建包含所有依赖的 classpath（包括 runtime scope）
   CLASSPATH="target/classes:$(mvn dependency:build-classpath -DincludeScope=runtime -Dmdep.outputFile=/dev/stdout -q)"
-  java -cp "$CLASSPATH" com.macro.mall.AccountGenerator
+  java -cp "$CLASSPATH" com.huigo.mall.AccountGenerator
 }
 
 echo "================== 账号生成完成 =================="

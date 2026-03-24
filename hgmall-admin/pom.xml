@@ -8,7 +8,7 @@
 		<version>4.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.macro</groupId>
+	<groupId>com.huigo</groupId>
 	<artifactId>hgmall_admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hgmall_admin</name>
@@ -32,7 +32,7 @@
 	<dependencies>
 		<!-- 引入 common 模块 -->
 		<dependency>
-			<groupId>com.macro</groupId>
+			<groupId>com.huigo</groupId>
 			<artifactId>hgmall_security</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -102,7 +102,7 @@
 
 		<!-- 引入 mbg 模块（包含生成的 Mapper 和 Model） -->
 		<dependency>
-			<groupId>com.macro</groupId>
+			<groupId>com.huigo</groupId>
 			<artifactId>hgmall-mbg</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

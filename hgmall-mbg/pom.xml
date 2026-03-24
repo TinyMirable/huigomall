@@ -8,7 +8,7 @@
 		<version>4.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.macro</groupId>
+	<groupId>com.huigo</groupId>
 	<artifactId>hgmall-mbg</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hgmall-mbg</name>
@@ -155,7 +155,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
-					<mainClass>com.macro.mall.AccountGenerator</mainClass>
+					<mainClass>com.huigo.mall.AccountGenerator</mainClass>
 					<classpathScope>compile</classpathScope>
 				</configuration>
 			</plugin>
@@ -178,7 +178,7 @@
 					<!-- 添加项目本身作为依赖，使插件能够访问 CommentGenerator 类 -->
 					<!-- 注意：需要先运行 mvn install 将项目安装到本地仓库 -->
 					<dependency>
-						<groupId>com.macro</groupId>
+						<groupId>com.huigo</groupId>
 						<artifactId>hgmall-mbg</artifactId>
 						<version>${project.version}</version>
 					</dependency>

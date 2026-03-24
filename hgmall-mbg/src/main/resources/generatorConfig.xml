@@ -10,10 +10,10 @@
     <!-- 上下文配置 -->
     <context id="default" targetRuntime="MyBatis3">
         <!-- PostgreSQL 保留关键字处理插件 -->
-        <plugin type="com.macro.mall.PostgreSQLReservedKeywordPlugin"/>
+        <plugin type="com.huigo.mall.PostgreSQLReservedKeywordPlugin"/>
         
         <!-- 自定义注释生成器 -->
-        <commentGenerator type="com.macro.mall.CommentGenerator">
+        <commentGenerator type="com.huigo.mall.CommentGenerator">
             <property name="suppressDate" value="false"/>
             <property name="suppressAllComments" value="false"/>
             <property name="addRemarkComments" value="true"/>
@@ -36,7 +36,7 @@
         </javaTypeResolver>
 
         <!-- 生成Model模型，对应的包路径和文件存放路径 -->
-        <javaModelGenerator targetPackage="com.macro.mall.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.huigo.mall.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="constructorBased" value="false"/>
@@ -48,7 +48,7 @@
         </sqlMapGenerator>
 
         <!-- 生成Mapper接口，对应的包路径 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.macro.mall.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.huigo.mall.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

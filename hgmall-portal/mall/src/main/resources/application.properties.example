@@ -18,7 +18,7 @@ spring.jpa.properties.hibernate.format_sql=true
 # MyBatis配置（mbg模块生成的Mapper）
 # 使用 classpath*: 来扫描 jar 包中的资源
 mybatis.mapper-locations=classpath*:mapper/*.xml
-mybatis.type-aliases-package=com.macro.mall.model
+mybatis.type-aliases-package=com.huigo.mall.model
 mybatis.configuration.map-underscore-to-camel-case=true
 
 # Redis配置
